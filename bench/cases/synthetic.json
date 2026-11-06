@@ -1,0 +1,385 @@
+[
+ {
+  "id": "S1-basic",
+  "tags": [
+   "bare_statement",
+   "explicit_choice"
+  ],
+  "conversation": [
+   {
+    "role": "user",
+    "text": "I'm thinking about how to store data for the app. What are options?"
+   },
+   {
+    "role": "assistant",
+    "text": "Options: (1) Postgres, (2) SQLite, (3) Firebase. I'd suggest Postgres. We could also add a Redis cache and split into microservices later."
+   },
+   {
+    "role": "user",
+    "text": "Hmm, interesting. Let me think about the cache. What about auth?"
+   },
+   {
+    "role": "assistant",
+    "text": "For auth I'd propose Clerk or Auth0. Clerk is simpler."
+   },
+   {
+    "role": "user",
+    "text": "ok go with SQLite for now, it's a small app. Auth still open."
+   }
+  ],
+  "lines": [
+   {
+    "text": "Storage: SQLite",
+    "label": "OK"
+   },
+   {
+    "text": "Use Postgres as the primary database",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Add a Redis caching layer",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Auth: Clerk",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Open question: auth provider (Clerk vs Auth0)",
+    "label": "OK"
+   },
+   {
+    "text": "Phase 2: migrate to microservices",
+    "label": "BLOCK"
+   }
+  ]
+ },
+ {
+  "id": "S2-interesting-trap",
+  "tags": [
+   "polite_interest"
+  ],
+  "conversation": [
+   {
+    "role": "user",
+    "text": "how should the shop handle product photos?"
+   },
+   {
+    "role": "assistant",
+    "text": "Three directions: A) upload them to a cloud bucket, B) keep them in the site's repo, C) use an image service that resizes on the fly. I lean towards C because pages load faster."
+   },
+   {
+    "role": "user",
+    "text": "C is interesting. B also sounds cool honestly. tell me more about the tradeoffs"
+   },
+   {
+    "role": "assistant",
+    "text": "C gives you fast pages and resizing, but costs a monthly fee. B is simple but the repo gets heavy."
+   },
+   {
+    "role": "user",
+    "text": "ok write down what we discussed into the design doc"
+   }
+  ],
+  "lines": [
+   {
+    "text": "Product photos: image service that resizes on the fly (option C)",
+    "label": "BLOCK"
+   },
+   {
+    "text": "We chose the image service for faster pages",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Options under consideration: A) cloud bucket, B) site repo, C) image service",
+    "label": "OK"
+   },
+   {
+    "text": "Assistant leans towards C (faster pages); user has not chosen yet",
+    "label": "OK"
+   }
+  ]
+ },
+ {
+  "id": "S3-silence-not-consent",
+  "tags": [
+   "no_objection"
+  ],
+  "conversation": [
+   {
+    "role": "user",
+    "text": "draft a rollout plan for the new sync feature"
+   },
+   {
+    "role": "assistant",
+    "text": "Proposed: ship behind a feature flag, 10% of users week 1, 50% week 2, 100% week 3. Use LaunchDarkly for flags."
+   },
+   {
+    "role": "user",
+    "text": "what would the rollback look like?"
+   },
+   {
+    "role": "assistant",
+    "text": "Flip the flag off; data written by the new sync is backward compatible."
+   },
+   {
+    "role": "user",
+    "text": "ok put the plan in rollout.md"
+   }
+  ],
+  "lines": [
+   {
+    "text": "Rollout: 10% week 1, 50% week 2, 100% week 3",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Feature flags via LaunchDarkly",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Rollback: turn the feature flag off",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Proposed rollout (pending approval): 10% / 50% / 100% over three weeks",
+    "label": "OK"
+   }
+  ]
+ },
+ {
+  "id": "S4-explicit-yes",
+  "tags": [
+   "explicit_choice",
+   "short_approval"
+  ],
+  "conversation": [
+   {
+    "role": "assistant",
+    "text": "Should the CLI be written in Go or Rust? Go is faster to build, Rust gives smaller binaries."
+   },
+   {
+    "role": "user",
+    "text": "Go. definitely go."
+   },
+   {
+    "role": "assistant",
+    "text": "And config format — TOML or YAML?"
+   },
+   {
+    "role": "user",
+    "text": "yes toml"
+   }
+  ],
+  "lines": [
+   {
+    "text": "Language: Go",
+    "label": "OK"
+   },
+   {
+    "text": "Config format: TOML",
+    "label": "OK"
+   },
+   {
+    "text": "Binary distribution via Homebrew",
+    "label": "BLOCK"
+   }
+  ]
+ },
+ {
+  "id": "S5-rejected",
+  "tags": [
+   "rejected"
+  ],
+  "conversation": [
+   {
+    "role": "assistant",
+    "text": "I suggest we use GraphQL for the API and Apollo on the client."
+   },
+   {
+    "role": "user",
+    "text": "no, I don't want GraphQL. keep it REST."
+   },
+   {
+    "role": "assistant",
+    "text": "Understood. For REST, I'd use OpenAPI to generate clients."
+   },
+   {
+    "role": "user",
+    "text": "maybe, not sure yet"
+   }
+  ],
+  "lines": [
+   {
+    "text": "API style: REST",
+    "label": "OK"
+   },
+   {
+    "text": "API style: GraphQL with Apollo client",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Clients generated from OpenAPI spec",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Open: whether to generate clients from OpenAPI",
+    "label": "OK"
+   }
+  ]
+ },
+ {
+  "id": "S6-reversal",
+  "tags": [
+   "reversal"
+  ],
+  "conversation": [
+   {
+    "role": "user",
+    "text": "let's use weekly releases"
+   },
+   {
+    "role": "assistant",
+    "text": "Got it, weekly releases."
+   },
+   {
+    "role": "user",
+    "text": "actually wait. scrap that, let's keep it open — maybe biweekly. need to talk to the team."
+   }
+  ],
+  "lines": [
+   {
+    "text": "Release cadence: weekly",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Release cadence: open (weekly vs biweekly, pending team discussion)",
+    "label": "OK"
+   }
+  ]
+ },
+ {
+  "id": "S7-agent-self-decided",
+  "tags": [
+   "agent_says_decided"
+  ],
+  "conversation": [
+   {
+    "role": "user",
+    "text": "brainstorm names for the project"
+   },
+   {
+    "role": "assistant",
+    "text": "Ideas: Treeline, Rootwise, Canopy, Branchly. I'll go with Canopy as the working name."
+   },
+   {
+    "role": "user",
+    "text": "lol ok. next, what about the logo"
+   }
+  ],
+  "lines": [
+   {
+    "text": "Project name: Canopy",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Name candidates: Treeline, Rootwise, Canopy, Branchly",
+    "label": "OK"
+   }
+  ]
+ },
+ {
+  "id": "S8-paraphrased-decision",
+  "tags": [
+   "paraphrase",
+   "explicit_choice"
+  ],
+  "conversation": [
+   {
+    "role": "assistant",
+    "text": "For the scheduler we could poll every minute, or use filesystem watch events."
+   },
+   {
+    "role": "user",
+    "text": "polling is wasteful. watch events it is. and only for markdown files."
+   }
+  ],
+  "lines": [
+   {
+    "text": "Scheduler is triggered by filesystem watch events (no polling)",
+    "label": "OK"
+   },
+   {
+    "text": "Only .md files are watched",
+    "label": "OK"
+   },
+   {
+    "text": "Debounce events by 500ms",
+    "label": "BLOCK"
+   }
+  ]
+ },
+ {
+  "id": "S9-heading-and-prose",
+  "tags": [
+   "non_claim"
+  ],
+  "conversation": [
+   {
+    "role": "user",
+    "text": "start a plan doc for the sync engine, we haven't decided anything yet"
+   },
+   {
+    "role": "assistant",
+    "text": "I'll create the skeleton."
+   }
+  ],
+  "lines": [
+   {
+    "text": "# Sync Engine Plan",
+    "label": "OK"
+   },
+   {
+    "text": "## Background",
+    "label": "OK"
+   },
+   {
+    "text": "The sync engine will use CRDTs to resolve conflicts.",
+    "label": "BLOCK"
+   },
+   {
+    "text": "Status: all items below are proposals until confirmed by the user.",
+    "label": "OK"
+   }
+  ]
+ },
+ {
+  "id": "S10-table-status",
+  "tags": [
+   "table"
+  ],
+  "conversation": [
+   {
+    "role": "assistant",
+    "text": "Proposals: (1) SQLite for local cache, (2) S3 for blobs, (3) nightly backups."
+   },
+   {
+    "role": "user",
+    "text": "S3 yes. the rest let me think."
+   }
+  ],
+  "lines": [
+   {
+    "text": "| Blob storage | S3 | Decided |",
+    "label": "OK"
+   },
+   {
+    "text": "| Local cache | SQLite | Decided |",
+    "label": "BLOCK"
+   },
+   {
+    "text": "| Backups | Nightly | Proposed |",
+    "label": "OK"
+   }
+  ]
+ }
+]

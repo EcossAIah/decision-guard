@@ -1,0 +1,28 @@
+{
+  "name": "decision-guard",
+  "version": "0.2.0",
+  "description": "Stops AI agents from writing their own proposals into your docs as if you had decided them",
+  "author": {
+    "name": "EcossAIah",
+    "url": "https://github.com/EcossAIah"
+  },
+  "homepage": "https://github.com/EcossAIah/decision-guard",
+  "repository": "https://github.com/EcossAIah/decision-guard",
+  "license": "Apache-2.0",
+  "keywords": ["hooks", "documentation", "decisions", "agents"],
+  "userConfig": {
+    "openrouter_api_key": {
+      "type": "string",
+      "title": "OpenRouter API key",
+      "description": "Used to check new doc lines with the decision model. Without a key, nothing is checked. Create one at https://openrouter.ai/keys",
+      "sensitive": true,
+      "required": true
+    },
+    "decision_model": {
+      "type": "string",
+      "title": "Decision model",
+      "description": "Any decision model on OpenRouter, such as typesafe/jev-1.14. Leave empty for the default, perplexity/pplx-decider-v1.2. List: https://openrouter.ai/rankings/decisions",
+      "default": ""
+    }
+  }
+}

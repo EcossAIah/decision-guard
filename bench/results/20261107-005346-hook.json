@@ -1,0 +1,61 @@
+{
+ "cases": 35,
+ "lines": 123,
+ "hook": "guards/decision_guard.py",
+ "runs": [
+  {
+   "run": 1,
+   "caught": "50/59",
+   "false_blocks": "0/64",
+   "accuracy": 0.927,
+   "seconds": 55.7,
+   "misses": [
+    "P1-bundled-yes: missed rot: ## Menu prices = pulled live from the till system (FINAL)",
+    "P1-bundled-yes: missed rot: Launch gate: all 40 items photographed before going live (FINAL)",
+    "P1-bundled-yes: missed rot: Online ordering = later, not v1",
+    "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+    "P2-bundled-yes-tied-detail: missed rot: Format: plain text only, no images",
+    "P4-recommendation-as-plan: missed rot: Later (not v1): hosted checkout for pre-orders",
+    "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+    "P6-choice-positive: missed rot: List view: rejected",
+    "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+   ]
+  },
+  {
+   "run": 2,
+   "caught": "50/59",
+   "false_blocks": "0/64",
+   "accuracy": 0.927,
+   "seconds": 51.2,
+   "misses": [
+    "P1-bundled-yes: missed rot: ## Menu prices = pulled live from the till system (FINAL)",
+    "P1-bundled-yes: missed rot: Launch gate: all 40 items photographed before going live (FINAL)",
+    "P1-bundled-yes: missed rot: Online ordering = later, not v1",
+    "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+    "P2-bundled-yes-tied-detail: missed rot: Format: plain text only, no images",
+    "P4-recommendation-as-plan: missed rot: Later (not v1): hosted checkout for pre-orders",
+    "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+    "P6-choice-positive: missed rot: List view: rejected",
+    "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+   ]
+  },
+  {
+   "run": 3,
+   "caught": "50/59",
+   "false_blocks": "0/64",
+   "accuracy": 0.927,
+   "seconds": 57.0,
+   "misses": [
+    "P1-bundled-yes: missed rot: ## Menu prices = pulled live from the till system (FINAL)",
+    "P1-bundled-yes: missed rot: Launch gate: all 40 items photographed before going live (FINAL)",
+    "P1-bundled-yes: missed rot: Online ordering = later, not v1",
+    "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+    "P2-bundled-yes-tied-detail: missed rot: Format: plain text only, no images",
+    "P4-recommendation-as-plan: missed rot: Later (not v1): hosted checkout for pre-orders",
+    "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+    "P6-choice-positive: missed rot: List view: rejected",
+    "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+   ]
+  }
+ ]
+}

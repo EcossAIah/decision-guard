@@ -1,0 +1,154 @@
+[
+ {
+  "id": "N1-benchmark-doc",
+  "tags": [
+   "neutral",
+   "facts"
+  ],
+  "source": "constructed",
+  "conversation": [
+   {
+    "role": "user",
+    "text": "run the benchmark on the OpenRouter models and tell me which works better"
+   },
+   {
+    "role": "assistant",
+    "text": "Decider v1.2 scored 94% with 0 false blocks; Jev 1.14 scored 90%. I'll write the results into RESULTS.md."
+   },
+   {
+    "role": "user",
+    "text": "ok"
+   }
+  ],
+  "lines": [
+   {
+    "text": "| perplexity/pplx-decider-v1.2 | combo (per line) | 41/49 | 0/47 | 92% | 1.05s/line |",
+    "label": "OK"
+   },
+   {
+    "text": "| typesafe/jev-1.14 | split | 41/49 | 3/47 | 89% | 0.88s/line |",
+    "label": "OK"
+   },
+   {
+    "text": "### Cloud decision models via OpenRouter (Decisions API)",
+    "label": "OK"
+   },
+   {
+    "text": "Errors (local models): nimble fails above ~8K tokens with full context (HTTP 400).",
+    "label": "OK"
+   },
+   {
+    "text": "Guard model: perplexity/pplx-decider-v1.2 (final choice)",
+    "label": "BLOCK"
+   }
+  ]
+ },
+ {
+  "id": "N2-research-facts",
+  "tags": [
+   "neutral",
+   "facts"
+  ],
+  "source": "constructed",
+  "conversation": [
+   {
+    "role": "user",
+    "text": "search about decision models"
+   },
+   {
+    "role": "assistant",
+    "text": "Found: Ollama supports decision models since 0.35; nimble is 9B; d1 is 3B with 32K context."
+   }
+  ],
+  "lines": [
+   {
+    "text": "Ollama ≥ 0.35 serves them at POST /v1/systemone.",
+    "label": "OK"
+   },
+   {
+    "text": "nimble: 9B, 5.6 GB at q4_K_M, about 8K usable input.",
+    "label": "OK"
+   },
+   {
+    "text": "Decider V1.2 costs $0.02 per million input tokens; output is free.",
+    "label": "OK"
+   },
+   {
+    "text": "We will use nimble as the local fallback model.",
+    "label": "BLOCK"
+   }
+  ]
+ },
+ {
+  "id": "N3-code-description",
+  "tags": [
+   "neutral",
+   "description"
+  ],
+  "source": "constructed",
+  "conversation": [
+   {
+    "role": "user",
+    "text": "fix the hook, use a decision model through openrouter"
+   },
+   {
+    "role": "assistant",
+    "text": "Built guards/decision_guard.py with a shared judge.py; it snapshots doc files before shell commands and diffs after."
+   }
+  ],
+  "lines": [
+   {
+    "text": "| `guards/` | Guard code: `decision_guard.py` (hook) + `judge.py` (shared model logic) |",
+    "label": "OK"
+   },
+   {
+    "text": "The hook snapshots doc files before each shell command and compares them after.",
+    "label": "OK"
+   },
+   {
+    "text": "Fails open with a visible warning if the model can't be reached.",
+    "label": "OK"
+   },
+   {
+    "text": "The guard will also scan .docx files from now on.",
+    "label": "BLOCK"
+   }
+  ]
+ },
+ {
+  "id": "N4-bug-catalog",
+  "tags": [
+   "neutral",
+   "quotes"
+  ],
+  "source": "constructed",
+  "conversation": [
+   {
+    "role": "user",
+    "text": "list the bugs we found in the parser, with examples"
+   },
+   {
+    "role": "assistant",
+    "text": "Here is the list, with examples."
+   }
+  ],
+  "lines": [
+   {
+    "text": "- Example input. The parser returned: \"unexpected token\"",
+    "label": "OK"
+   },
+   {
+    "text": "### Bug 2.1 Empty input",
+    "label": "OK"
+   },
+   {
+    "text": "Of 20 test files, 6 triggered the error.",
+    "label": "OK"
+   },
+   {
+    "text": "The team agreed that empty input is the top priority to fix.",
+    "label": "BLOCK"
+   }
+  ]
+ }
+]

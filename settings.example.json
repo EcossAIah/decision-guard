@@ -1,0 +1,22 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|NotebookEdit|Bash|Artifact|mcp__claude_ai_Claude_Docs__.*",
+        "hooks": [{ "type": "command", "command": "python3 ~/.claude/hooks/decision-guard/decision_guard.py", "timeout": 90, "statusMessage": "decision guard" }]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": "python3 ~/.claude/hooks/decision-guard/decision_guard.py", "timeout": 90, "statusMessage": "decision guard" }]
+      }
+    ],
+    "PostToolUseFailure": [
+      {
+        "matcher": "Bash",
+        "hooks": [{ "type": "command", "command": "python3 ~/.claude/hooks/decision-guard/decision_guard.py", "timeout": 90, "statusMessage": "decision guard" }]
+      }
+    ]
+  }
+}

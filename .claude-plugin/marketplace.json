@@ -1,0 +1,17 @@
+{
+  "name": "decision-guard",
+  "owner": {
+    "name": "EcossAIah",
+    "url": "https://github.com/EcossAIah"
+  },
+  "metadata": {
+    "description": "Decision guard for Claude Code"
+  },
+  "plugins": [
+    {
+      "name": "decision-guard",
+      "source": "./",
+      "description": "Stops AI agents from writing their own proposals into your docs as if you had decided them"
+    }
+  ]
+}

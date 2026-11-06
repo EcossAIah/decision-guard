@@ -1,0 +1,7 @@
+.env
+*.env
+__pycache__/
+*.pyc
+*.bak*
+.DS_Store
+tests/cards/

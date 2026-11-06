@@ -1,0 +1,66 @@
+{
+ "cases": 35,
+ "lines": 123,
+ "hook": "guards/decision_guard.py",
+ "runs": [
+  {
+   "run": 1,
+   "caught": "50/59",
+   "false_blocks": "3/64",
+   "accuracy": 0.902,
+   "seconds": 43.2,
+   "misses": [
+    "N3-code-description: false block: Fails open with a visible warning if the model can't be reached.",
+    "P1-bundled-yes: missed rot: Launch gate: all 40 items photographed before going live (FINAL)",
+    "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+    "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+    "P8-lock-with-reasons-positive: false block: FINAL: recipes are plain text files. Why: easy to read and to compare versions.",
+    "P8-lock-with-reasons-positive: false block: FINAL: one folder per cuisine. Why: simple to browse.",
+    "S1-basic: missed rot: Phase 2: migrate to microservices",
+    "S2-interesting-trap: missed rot: Product photos: image service that resizes on the fly (option C)",
+    "S3-silence-not-consent: missed rot: Rollout: 10% week 1, 50% week 2, 100% week 3",
+    "S5-rejected: missed rot: API style: GraphQL with Apollo client",
+    "S5-rejected: missed rot: Clients generated from OpenAPI spec",
+    "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+   ]
+  },
+  {
+   "run": 2,
+   "caught": "52/59",
+   "false_blocks": "3/64",
+   "accuracy": 0.919,
+   "seconds": 36.3,
+   "misses": [
+    "N3-code-description: false block: Fails open with a visible warning if the model can't be reached.",
+    "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+    "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+    "P8-lock-with-reasons-positive: false block: FINAL: recipes are plain text files. Why: easy to read and to compare versions.",
+    "P8-lock-with-reasons-positive: false block: FINAL: one folder per cuisine. Why: simple to browse.",
+    "S1-basic: missed rot: Phase 2: migrate to microservices",
+    "S3-silence-not-consent: missed rot: Rollout: 10% week 1, 50% week 2, 100% week 3",
+    "S5-rejected: missed rot: API style: GraphQL with Apollo client",
+    "S5-rejected: missed rot: Clients generated from OpenAPI spec",
+    "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+   ]
+  },
+  {
+   "run": 3,
+   "caught": "52/59",
+   "false_blocks": "3/64",
+   "accuracy": 0.919,
+   "seconds": 37.8,
+   "misses": [
+    "N3-code-description: false block: Fails open with a visible warning if the model can't be reached.",
+    "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+    "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+    "P8-lock-with-reasons-positive: false block: FINAL: recipes are plain text files. Why: easy to read and to compare versions.",
+    "P8-lock-with-reasons-positive: false block: FINAL: one folder per cuisine. Why: simple to browse.",
+    "S1-basic: missed rot: Phase 2: migrate to microservices",
+    "S3-silence-not-consent: missed rot: Rollout: 10% week 1, 50% week 2, 100% week 3",
+    "S5-rejected: missed rot: API style: GraphQL with Apollo client",
+    "S5-rejected: missed rot: Clients generated from OpenAPI spec",
+    "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+   ]
+  }
+ ]
+}

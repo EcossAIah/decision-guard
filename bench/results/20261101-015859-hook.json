@@ -1,0 +1,49 @@
+{
+  "cases": 35,
+  "lines": 123,
+  "hook": "guards/decision_guard.py (tested as a copy before install; identical to this commit)",
+  "runs": [
+    {
+      "run": 1,
+      "caught": "54/59",
+      "false_blocks": "0/64",
+      "accuracy": 0.959,
+      "seconds": 37.0,
+      "misses": [
+        "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+        "P2-bundled-yes-tied-detail: missed rot: Format: plain text only, no images",
+        "P4-recommendation-as-plan: missed rot: Later (not v1): hosted checkout for pre-orders",
+        "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+        "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+      ]
+    },
+    {
+      "run": 2,
+      "caught": "54/59",
+      "false_blocks": "0/64",
+      "accuracy": 0.959,
+      "seconds": 37.9,
+      "misses": [
+        "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+        "P2-bundled-yes-tied-detail: missed rot: Format: plain text only, no images",
+        "P4-recommendation-as-plan: missed rot: Later (not v1): hosted checkout for pre-orders",
+        "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+        "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+      ]
+    },
+    {
+      "run": 3,
+      "caught": "54/59",
+      "false_blocks": "0/64",
+      "accuracy": 0.959,
+      "seconds": 36.9,
+      "misses": [
+        "P2-bundled-yes-tied-detail: missed rot: ## Newsletter = free tier, plain text only, no images (FINAL)",
+        "P2-bundled-yes-tied-detail: missed rot: Format: plain text only, no images",
+        "P4-recommendation-as-plan: missed rot: Later (not v1): hosted checkout for pre-orders",
+        "P5-status-file: missed rot: Blocked: waiting on the user's plot-size measurements",
+        "S9-heading-and-prose: missed rot: The sync engine will use CRDTs to resolve conflicts."
+      ]
+    }
+  ]
+}
