@@ -224,7 +224,7 @@ The default model scored 54 of 59 before version 0.2.0, when each line was writt
 - **Cloud sessions:** Claude Code cloud sessions don't load plugins from your local settings, so this plugin won't run there. Not tested in the cloud.
 - **One provider:** any decision model works if OpenRouter carries it, through its Decisions API, which is labelled alpha. Other providers, and your own local models, aren't supported yet. A mistyped model name blocks doc writes with a message saying so, until you fix it.
 - **Other coding tools:** built and tested for Claude Code. The saved-log fallback is ready for tools that give no log, but each tool (Codex, Gemini CLI, Cursor, Copilot, ...) still needs a small adapter for its own field and tool names. Codex 0.165 `codex exec` fired no before/after-tool hooks for shell commands in a test (2026-11-04).
-- **Deliberate forgery:** the guard defends against an agent drifting, not one attacking the guard. An agent that writes fake session logs or fake guard state in an earlier command can make its text look like another session's.
+- **Deliberate forgery:** the guard defends against an agent drifting, not one attacking the guard. An agent that writes fake session logs or fake guard state in an earlier command can make its text look like another session's. Likewise, text typed by a shell command into Claude's temp folder (not judged there), then copied over a doc with its size and date forged to match (`touch -r`), is not seen as changed.
 - **Big writes:** a Write/Edit with more than 600 pieces to judge (lines, with long lines counting once per 1,000 characters) is blocked; write large docs in pieces. A shell write that big is judged 600 pieces per command.
 
 ## License

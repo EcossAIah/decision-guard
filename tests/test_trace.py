@@ -545,5 +545,36 @@ class Trace(unittest.TestCase):
         self.assertEqual(got, {"- Decision: the user picked Postgres"})
 
 
+    def test_shell_typed_temp_folder_moved_into_repo_is_judged(self):
+        # shell writes into Claude's temp folder are not judged there; moving the whole folder keeps
+        # every file's dates, so the doc must count as new because it was not there before the command
+        self.git_repo({"notes.md": "# Notes\n"})
+        self.prime()
+        root = f"/private/tmp/claude-{os.getuid()}"
+        os.makedirs(root, exist_ok=True)
+        d = tempfile.mkdtemp(prefix="dgtest-", dir=root)
+        self.addCleanup(shutil.rmtree, d, True)
+        sub = os.path.join(d, "drafts")
+        os.makedirs(sub)
+        self.run_cmd(f"echo '- Decision: the user picked Postgres' > {sub}/plan.md")
+        t = time.time() - 600
+        os.utime(f"{sub}/plan.md", (t, t))
+        time.sleep(2.2)  # the file's change time is now older than the next command too
+        got, _ = self.run_cmd(f"mv {sub} drafts")
+        self.assertEqual(got, {"- Decision: the user picked Postgres"})
+
+    def test_old_unseen_doc_in_new_root_not_judged(self):
+        # a folder the guard never watched before: its old docs are not new writing
+        self.git_repo({"notes.md": "# Notes\n"})
+        self.prime()
+        other = os.path.join(self.tmp, "other")
+        os.makedirs(other)
+        self.write("old.md", "- Decision: someone else's text\n", root=other)
+        self.age(other)
+        time.sleep(2.2)
+        got, _ = self.run_cmd(f"cd {other} && ls")
+        self.assertEqual(got, set())
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

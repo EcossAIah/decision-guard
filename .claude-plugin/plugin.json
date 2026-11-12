@@ -1,6 +1,6 @@
 {
   "name": "decision-guard",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Stops AI agents from writing their own proposals into your docs as if you had decided them",
   "author": {
     "name": "EcossAIah",

@@ -544,9 +544,13 @@ def roots_for(cwd, command):
     return list(dict.fromkeys([cwd] + cd_dirs(command, cwd)))
 
 
+SCAN_COMPLETE = [True]  # did the last scan() list every doc under its roots?
+
+
 def scan(roots, command=""):
     """Doc files to watch under each root (its git repo if any, else 2 levels deep), plus files named in the command."""
     found, t0 = {}, time.time()
+    SCAN_COMPLETE[0] = True
     for start in roots:
         root = git_root(start)
         max_depth = 8 if root else 2
@@ -554,6 +558,7 @@ def scan(roots, command=""):
         base_depth = root.rstrip("/").count("/")
         for d, dirs, files in os.walk(root):
             if time.time() - t0 > SCAN_SECONDS or len(found) >= MAX_FILES:
+                SCAN_COMPLETE[0] = False  # the list is partial: a doc missing from it may have been there all along
                 break
             if d.count("/") - base_depth >= max_depth:
                 dirs[:] = []
@@ -2070,7 +2075,7 @@ def bash_pre(data):
         if dirty:
             save_json(d, "index.json", idx)
         tid = data.get("tool_use_id") or "?"
-        inflight[tid] = {"t": now, "roots": roots, "cmd": cmd[:20000]}
+        inflight[tid] = {"t": now, "roots": roots, "cmd": cmd[:20000], "complete": SCAN_COMPLETE[0]}
         save_json(d, "inflight.json", inflight)
         save_json(d, git_file(tid), gstate)  # own file: a repo's ref list can be large
     os.utime(d)  # session active, for prune()
@@ -2191,6 +2196,11 @@ def bash_post(data):
     return {"systemMessage": "\n".join(notes)} if notes else None
 
 
+def under(p, roots):
+    """Is p inside one of the folders scan() walks for these roots?"""
+    return any(p.startswith((git_root(r) or r).rstrip("/") + "/") for r in roots)
+
+
 def bash_post_diff(d, cwd, cmd, tid, data=None):
     now = time.time()
     inflight = running(load(d, "inflight.json", {}), now, data)
@@ -2240,7 +2250,10 @@ def bash_post_diff(d, cwd, cmd, tid, data=None):
             continue
         # mv and cp -p keep a file's old modified time; its change time (ctime) still moves, so a doc
         # written elsewhere and moved in is still seen
-        moved_in = meta[0] < since - 1 <= fst.st_ctime
+        # a doc missing from a complete before-list arrived during the command (e.g. its folder was moved in),
+        # whatever its dates say
+        arrived = not rec and me.get("complete") and under(p, me["roots"])
+        moved_in = meta[0] < since - 1 and (since - 1 <= fst.st_ctime or arrived)
         if meta[0] < since - 1 and not moved_in:
             old = None   # changed before any running command started (another session, an editor): don't judge
         elif rec:
