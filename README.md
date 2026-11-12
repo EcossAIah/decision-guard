@@ -176,7 +176,10 @@ python3 -W ignore tests/test_trace.py
 python3 -W ignore tests/test_trace_redteam.py
 python3 -W ignore tests/test_cost.py
 python3 -W ignore tests/test_plugin.py
+python3 -W ignore tests/test_answers.py
 ```
+
+`test_answers.py` checks that question-box answers reach the model in every wording Claude Code uses, that long answers are kept whole, and that a refused question box or another tool's output never counts as an answer.
 
 `test_cost.py` checks that unneeded judge calls are skipped (Docs lookups, notebook code cells, Claude's own storage) while real docs are still judged, and that paid calls are logged even when judging fails partway.
 

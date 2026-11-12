@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.1
+
+- Fixed: answers given in question boxes were often not shown to the model. Claude Code words them in different ways ("The user answered: ...", "Your questions have been answered: ..."), and only one wording was recognized. Lines recording those answers were flagged as undecided. Answers are now recognized by the question box they reply to, whatever the wording, and long typed answers are kept whole.
+- Fixed: the log could grow to hundreds of MB when many lines went unchecked. Each such record now lists at most 50 lines, plus a count.
+
 ## 0.2.0
 
 - Added a `decision_model` setting: use any decision model on OpenRouter.

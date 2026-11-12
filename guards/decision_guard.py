@@ -76,9 +76,13 @@ def _strip_reminders(t):
     return t.strip()
 
 
+ANSWER_CHARS = 12000  # one round of question-box answers, kept whole (typed answers can be long)
+_ANSWERED = re.compile(r"^\s*(?:The user answered|User has answered|Your questions? (?:has|have) been answered)", re.I)
+
+
 def conversation(transcript_path):
     """USER/ASSISTANT turns, newest kept, within CONTEXT_CHARS. Question-dialog answers count as USER."""
-    turns = []
+    turns, asks = [], set()  # ids of question-box calls: their results are the user's answers
     try:
         for raw in open(transcript_path, encoding="utf-8", errors="ignore"):
             try:
@@ -94,12 +98,17 @@ def conversation(transcript_path):
                     for b in content:  # answers to AskUserQuestion arrive as tool results
                         if isinstance(b, dict) and b.get("type") == "tool_result":
                             r = _text(b.get("content")) if not isinstance(b.get("content"), str) else b["content"]
-                            if "answered" in r and "question" in r.lower():
-                                turns.append(("USER (answered a question)", r[:2000]))
+                            # known by the call it answers (Claude Code words it differently over time:
+                            # "The user answered: ...", "Your questions have been answered: ..."), else by wording
+                            if (b.get("tool_use_id") in asks and not b.get("is_error")) or _ANSWERED.match(r):
+                                turns.append(("USER (answered a question)", r[:ANSWER_CHARS]))
                 t = _strip_reminders(_text(content))
                 if t and not t.startswith("<local-command") and not t.startswith("<command-"):
                     turns.append(("USER", t[:3000]))
             elif e.get("type") == "assistant":
+                for b in content if isinstance(content, list) else []:
+                    if isinstance(b, dict) and b.get("type") == "tool_use" and b.get("name") == "AskUserQuestion":
+                        asks.add(b.get("id"))
                 t = _text(content).strip()
                 if t:
                     turns.append(("ASSISTANT", t[:1500]))
@@ -2108,8 +2117,8 @@ def moved_to(e, paths, deadline):
 
 def never_checked(session, entries, why):
     if entries:
-        log({"session": session, "never_checked": [{"path": e["path"], "line": e["line"][:240]} for e in entries],
-             "why": why})
+        log({"session": session, "never_checked": [{"path": e["path"], "line": e["line"][:240]} for e in entries[:50]],
+             "count": len(entries), "why": why})  # capped: one record once held millions of lines (209 MB)
 
 
 def bash_post(data):
